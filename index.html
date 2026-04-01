@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>PixelPort | Retro Game Marketplace</title>
+    <meta name="description" content="Premium marketplace for authentic retro video games, consoles, and collectibles.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="pixel-logo">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="6" width="20" height="12" rx="2"/>
+                            <path d="M8 6V4h8v2M12 18v2M7 10h2M15 10h2"/>
+                        </svg>
+                        <span class="logo-text">PIXEL<span>PORT</span></span>
+                    </div>
+                </a>
+
+                <!-- Search Bar - Desktop Only -->
+                <div class="search-bar desktop-only">
+                    <input type="text" placeholder="Search games, consoles..." id="searchInput">
+                    <button class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21L16 16"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-trigger" id="homeDropdown">
+                            <span class="nav-text">Home</span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">
+                                <a href="index.html" class="active">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-8H9v8H5a2 2 0 0 1-2-2z"/>
+                                    </svg>
+                                    <span>Home 1 (Retro Landing)</span>
+                                    <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="home2.html">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 7h-4.18A3 3 0 0 0 16 5.18V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v1.18A3 3 0 0 0 8.18 7H4"/>
+                                        <path d="M4 7v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7"/>
+                                    </svg>
+                                    <span>Home 2 (Marketplace)</span>
+                                    <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    
+                    <!-- Login & Register Links - Inside Navigation -->
+                    <li class="nav-divider desktop-only">|</li>
+                    <li class="nav-auth" id="authLinks">
+                        <a href="#" class="auth-link" id="loginNavLink">Login</a>
+                        <span class="auth-sep">/</span>
+                        <a href="#" class="auth-link" id="registerNavLink">Register</a>
+                    </li>
+                    
+                    <!-- User Menu (Hidden by default, shown after login) -->
+                    <li class="nav-user" id="userMenu" style="display: none;">
+                        <div class="user-menu-trigger" id="userMenuTrigger">
+                            <span class="user-avatar-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </span>
+                            <span class="user-name" id="userName">User</span>
+                            <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                        <ul class="user-dropdown-menu" id="userDropdownMenu">
+                            <li><a href="profile.html">My Profile</a></li>
+                            <li><a href="orders.html">My Orders</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Action Group (RTL + Theme + Cart + Hamburger) -->
+                <div class="action-group">
+                    <!-- RTL Toggle Button -->
+                    <button class="action-btn rtl-toggle" id="rtlToggle" aria-label="Toggle RTL mode">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 21L16 3M3 12h18"/>
+                        </svg>
+                    </button>
+
+                    <!-- Theme Toggle Button -->
+                    <button class="action-btn theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                        <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                        <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+
+                    <!-- Cart Icon -->
+                    <a href="cart.html" class="cart-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+
+                    <!-- Hamburger Menu Button -->
+                    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Search Bar -->
+    <div class="mobile-search mobile-only">
+        <div class="container">
+            <div class="mobile-search-wrapper">
+                <input type="text" placeholder="Search games, consoles..." id="mobileSearchInput">
+                <button class="mobile-search-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21L16 16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="closeLoginModal">&times;</button>
+            <div class="modal-header">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+                </svg>
+                <h2>Welcome Back</h2>
+                <p>Login to your PixelPort account</p>
+            </div>
+            <form class="modal-form" id="loginForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary btn-full">Login</button>
+                <p class="form-footer">
+                    Don't have an account? <a href="#" id="switchToRegister">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="closeRegisterModal">&times;</button>
+            <div class="modal-header">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M17 3l4 4-4 4M21 7h-8"/>
+                </svg>
+                <h2>Create Account</h2>
+                <p>Join the PixelPort community</p>
+            </div>
+            <form class="modal-form" id="registerForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" required> I agree to the <a href="#">Terms of Service</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary btn-full">Create Account</button>
+                <p class="form-footer">
+                    Already have an account? <a href="#" id="switchToLogin">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">SINCE 2026</div>
+                <h1 class="hero-title">Relive the Golden<br>Age of Gaming</h1>
+                <p class="hero-subtitle">Authentic retro games • Professional grading • Worldwide shipping</p>
+                <div class="hero-buttons">
+                    <a href="shop.html" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 7h-4.18A3 3 0 0 0 16 5.18V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v1.18A3 3 0 0 0 8.18 7H4"/>
+                            <path d="M4 7v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7"/>
+                        </svg>
+                        EXPLORE COLLECTION
+                    </a>
+                    <a href="about.html" class="btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        OUR STORY
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Games Sold</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Authenticity Rate</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Countries Served</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PLATFORMS</span>
+                <h2 class="section-title">Shop by Console</h2>
+                <p class="section-description">Discover authentic games from your favorite retro platforms</p>
+            </div>
+            
+            <div class="categories-grid">
+                <a href="shop.html?console=nintendo" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M8 8h8M8 12h4"/>
+                        </svg>
+                    </div>
+                    <h3>Nintendo</h3>
+                    <p>NES • SNES • N64 • GameCube</p>
+                    <span class="category-count">248 items</span>
+                </a>
+                <a href="shop.html?console=sega" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 6h16v12H4zM8 10h8M12 6v12"/>
+                        </svg>
+                    </div>
+                    <h3>Sega</h3>
+                    <p>Genesis • Dreamcast • Saturn</p>
+                    <span class="category-count">156 items</span>
+                </a>
+                <a href="shop.html?console=playstation" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="8"/>
+                            <path d="M12 4v16M4 12h16"/>
+                        </svg>
+                    </div>
+                    <h3>PlayStation</h3>
+                    <p>PS1 • PS2 • PS3 • PS4</p>
+                    <span class="category-count">312 items</span>
+                </a>
+                <a href="shop.html?console=xbox" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 8h6M12 8v8"/>
+                        </svg>
+                    </div>
+                    <h3>Xbox</h3>
+                    <p>Original • 360 • One</p>
+                    <span class="category-count">124 items</span>
+                </a>
+                <a href="shop.html?console=atari" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="4 16 12 4 20 16 12 12 4 16"/>
+                        </svg>
+                    </div>
+                    <h3>Atari</h3>
+                    <p>2600 • 5200 • 7800</p>
+                    <span class="category-count">89 items</span>
+                </a>
+                <a href="shop.html?console=neogeo" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+                            <path d="M9 10h6M12 10v4"/>
+                        </svg>
+                    </div>
+                    <h3>Neo Geo</h3>
+                    <p>AES • MVS • CD</p>
+                    <span class="category-count">45 items</span>
+                </a>
+                <a href="shop.html?console=gameboy" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="4" y="6" width="16" height="12" rx="2"/>
+                            <path d="M8 12h8M12 8v8"/>
+                        </svg>
+                    </div>
+                    <h3>Game Boy</h3>
+                    <p>GB • GBC • GBA</p>
+                    <span class="category-count">203 items</span>
+                </a>
+                <a href="shop.html?console=turbografx" class="category-card">
+                    <div class="category-icon">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <ellipse cx="12" cy="12" rx="8" ry="6"/>
+                            <path d="M12 6v12M8 9l8 6M8 15l8-6"/>
+                        </svg>
+                    </div>
+                    <h3>TurboGrafx</h3>
+                    <p>TG-16 • PC Engine</p>
+                    <span class="category-count">67 items</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CURATED SELECTION</span>
+                <h2 class="section-title">Featured Games</h2>
+                <p class="section-description">Hand-picked authentic titles from our collection</p>
+            </div>
+            
+            <div class="products-grid" id="featuredProducts">
+                <div class="product-card" data-id="1">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?w=400&h=400&fit=crop" alt="Super Mario Bros. 3">
+                        <span class="product-badge">Rare</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Super Mario Bros. 3</h3>
+                        <p class="product-console">NES</p>
+                        <p class="product-condition">Condition: Excellent</p>
+                        <div class="product-price">$29.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" data-id="2">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=400&fit=crop" alt="Sonic the Hedgehog 2">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sonic the Hedgehog 2</h3>
+                        <p class="product-console">Sega Genesis</p>
+                        <p class="product-condition">Condition: Good</p>
+                        <div class="product-price">$19.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" data-id="3">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop" alt="The Legend of Zelda: Ocarina of Time">
+                        <span class="product-badge">Collector's</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">The Legend of Zelda: Ocarina of Time</h3>
+                        <p class="product-console">Nintendo 64</p>
+                        <p class="product-condition">Condition: Like New</p>
+                        <div class="product-price">$49.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" data-id="4">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop" alt="Final Fantasy VII">
+                        <span class="product-badge">Rare</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Final Fantasy VII</h3>
+                        <p class="product-console">PlayStation</p>
+                        <p class="product-condition">Condition: Excellent</p>
+                        <div class="product-price">$59.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="shop.html" class="btn-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    VIEW ALL GAMES
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 12V8H4v4M12 4v16M8 4h8M4 12h16M4 12v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <h3>Authenticity Guaranteed</h3>
+                    <p>Every item professionally inspected, tested, and verified for authenticity.</p>
+                    <a href="#" class="service-link">Learn more →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 12h-4l-3 9-4-18-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Professional Grading</h3>
+                    <p>Industry-standard grading system for condition assessment.</p>
+                    <a href="#" class="service-link">Learn more →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 6h18M8 6V4h8v2M12 12v6M8 18h8"/>
+                            <rect x="4" y="6" width="16" height="12" rx="1"/>
+                        </svg>
+                    </div>
+                    <h3>Secure Packaging</h3>
+                    <p>Protective packaging with tracking and insurance for safe delivery.</p>
+                    <a href="#" class="service-link">Learn more →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>Expert Support</h3>
+                    <p>Dedicated collector support team for inquiries.</p>
+                    <a href="#" class="service-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Newsletter Section - Increased Size Design -->
+<section class="newsletter">
+    <div class="pixel-corner"></div>
+    <div class="pixel-corner-right"></div>
+    <div class="glow-ring"></div>
+    <div class="container">
+        <div class="newsletter-wrapper">
+            <!-- Left Badge Section -->
+            <div class="newsletter-badge">
+                <div class="badge-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Pixel Insider</h3>
+                    <div class="badge-sub">EXCLUSIVE ACCESS</div>
+                </div>
+            </div>
+            
+            <!-- Center Main Content -->
+            <div class="newsletter-main">
+                <h2>
+                    Join the Community 
+                    <span>✨ 2,500+ members</span>
+                </h2>
+                <p>Get first dibs on rare finds, price drops, and exclusive collector tips delivered weekly</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        Subscribe Now
+                    </button>
+                </form>
+                <div class="form-note">
+                    <span>🔔 No spam ever</span>
+                    <span>⚡ Instant updates</span>
+                    <span>🎁 Member perks</span>
+                    <span>📧 Weekly curated picks</span>
+                </div>
+            </div>
+            
+            <!-- Right Stats Section -->
+            <div class="newsletter-stats">
+                <div class="stat-item">
+                    <div class="stat-dot"></div>
+                    <div class="stat-text"><strong>2,500+</strong> active collectors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-text"><strong>Weekly</strong> curated picks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-text"><strong>Early access</strong> to rare drops</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-text"><strong>98%</strong> member satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo-link">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="6" width="20" height="12" rx="2"/>
+                            <path d="M8 6V4h8v2M12 18v2M7 10h2M15 10h2"/>
+                        </svg>
+                        PIXEL<span>PORT</span>
+                    </div>
+                </a>
+                <p>Preserving gaming history, one cartridge at a time.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Games</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Graded Items</a></li>
+                    <li><a href="#">Consoles</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="#" id="footerLoginLink">Login</a></li>
+                    <li><a href="#" id="footerRegisterLink">Register</a></li>
+                    <li><a href="#">My Orders</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 PixelPort. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
