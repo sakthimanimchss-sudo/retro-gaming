@@ -92,8 +92,7 @@
                     <li class="nav-divider desktop-only">|</li>
                     <li class="nav-auth" id="authLinks">
                         <a href="#" class="auth-link" id="loginNavLink">Login</a>
-                        <span class="auth-sep">/</span>
-                        <a href="#" class="auth-link" id="registerNavLink">Register</a>
+                  
                     </li>
                     
                 </ul>
@@ -518,76 +517,102 @@
         </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-container">
-            <button class="modal-close" id="closeLoginModal">&times;</button>
-            <div class="modal-header">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
-                </svg>
-                <h2>Welcome Back</h2>
-                <p>Login to your PixelPort account</p>
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+        <button class="modal-close" id="closeLoginModal">&times;</button>
+        <div class="modal-header">
+            <div class="modal-brand">
+                <a href="index.html" class="modal-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="6" width="20" height="12" rx="2"/>
+                        <path d="M8 6V4h8v2M12 18v2M7 10h2M15 10h2"/>
+                    </svg>
+                    PIXEL<span>PORT</span>
+                </a>
             </div>
-            <form class="modal-form" id="loginForm">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter your password" required>
-                </div>
-                <div class="form-options">
-                    <label class="checkbox"><input type="checkbox"> Remember me</label>
-                    <a href="#" class="forgot-link">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn-primary btn-full">Login</button>
-                <p class="form-footer">Don't have an account? <a href="#" id="switchToRegister">Sign up</a></p>
-            </form>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+            </svg>
+            <h2>Welcome Back</h2>
+            <p>Login to your PixelPort account</p>
         </div>
+        <form class="modal-form" id="loginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-options">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Login</button>
+            <p class="form-footer">
+                Don't have an account? <a href="#" id="switchToRegister">Sign up</a>
+            </p>
+        </form>
     </div>
+</div>
 
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-container">
-            <button class="modal-close" id="closeRegisterModal">&times;</button>
-            <div class="modal-header">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M17 3l4 4-4 4M21 7h-8"/>
-                </svg>
-                <h2>Create Account</h2>
-                <p>Join the PixelPort community</p>
+<!-- Register Modal -->
+<div class="modal" id="registerModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+        <button class="modal-close" id="closeRegisterModal">&times;</button>
+        <div class="modal-header">
+            <div class="modal-brand">
+                <a href="index.html" class="modal-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="6" width="20" height="12" rx="2"/>
+                        <path d="M8 6V4h8v2M12 18v2M7 10h2M15 10h2"/>
+                    </svg>
+                    PIXEL<span>PORT</span>
+                </a>
             </div>
-            <form class="modal-form" id="registerForm">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Create a password" required>
-                </div>
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" placeholder="Confirm your password" required>
-                </div>
-                <div class="form-options">
-                    <label class="checkbox"><input type="checkbox" required> I agree to the <a href="#">Terms of Service</a></label>
-                </div>
-                <button type="submit" class="btn-primary btn-full">Create Account</button>
-                <p class="form-footer">Already have an account? <a href="#" id="switchToLogin">Sign in</a></p>
-            </form>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+                <path d="M17 3l4 4-4 4M21 7h-8"/>
+            </svg>
+            <h2>Create Account</h2>
+            <p>Join the PixelPort community</p>
         </div>
+        <form class="modal-form" id="registerForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm your password" required>
+            </div>
+            <div class="form-options">
+                <label class="checkbox">
+                    <input type="checkbox" required> I agree to the <a href="#">Terms of Service</a>
+                </label>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Create Account</button>
+            <p class="form-footer">
+                Already have an account? <a href="#" id="switchToLogin">Sign in</a>
+            </p>
+        </form>
     </div>
+</div>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/cart.js"></script>
