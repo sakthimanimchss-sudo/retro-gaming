@@ -831,7 +831,7 @@ section {
 
 .newsletter-main p {
   font-size: 1rem;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.95);  /* ← was opacity: 0.9, now explicit white */
   margin-bottom: 1.75rem;
   max-width: 500px;
   margin-left: auto;
@@ -907,15 +907,15 @@ section {
   gap: 1.5rem;
   margin-top: 1rem;
   font-size: 0.75rem;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.9);  /* ← was opacity: 0.8, now explicit white */
 }
 
 .form-note span {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.9);  /* ← added explicit color */
 }
-
 /* Right side - mini stats with increased size */
 .newsletter-stats {
   flex: 1.2;
@@ -962,7 +962,7 @@ section {
 }
 
 .stat-item .stat-text {
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.95);  /* ← was opacity: 0.9, now explicit white */
   font-size: 0.9rem;
 }
 
