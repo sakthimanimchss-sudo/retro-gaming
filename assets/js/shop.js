@@ -4,7 +4,7 @@
 
 // Sample Product Data (24 products for demonstration)
 const allProducts = [
-    { id: 1, title: "Super Mario Bros. 3", console: "Nintendo", category: "nintendo", price: 29.99, condition: "excellent", stock: "in-stock", rating: 4.9, image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?w=400&h=400&fit=crop", badge: "Rare" },
+    { id: 1, title: "Super Mario Bros. 3", console: "Nintendo", category: "nintendo", price: 29.99, condition: "excellent", stock: "in-stock", rating: 4.9, image: "https://github.com/sakthimanimchss-sudo/retro-game-/blob/main/assets/image/24943.jpg?raw=true", badge: "Rare" },
     { id: 2, title: "Sonic the Hedgehog 2", console: "Sega", category: "sega", price: 19.99, condition: "good", stock: "in-stock", rating: 4.7, image: "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=400&fit=crop" },
     { id: 3, title: "The Legend of Zelda: Ocarina of Time", console: "Nintendo", category: "nintendo", price: 49.99, condition: "like-new", stock: "in-stock", rating: 5.0, image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop", badge: "Collector's" },
     { id: 4, title: "Final Fantasy VII", console: "PlayStation", category: "playstation", price: 59.99, condition: "excellent", stock: "low-stock", rating: 4.9, image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop", badge: "Rare" },
