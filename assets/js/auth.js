@@ -22,19 +22,21 @@ const userMenuTrigger = document.getElementById('userMenuTrigger');
 const userDropdownMenu = document.getElementById('userDropdownMenu');
 
 // ============================================
-// Modal Functions
+// Modal Functions — FIXED: set display before active class
 // ============================================
 function openLoginModal() {
     if (loginModal) {
-        loginModal.classList.add('active');
+        loginModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        setTimeout(() => loginModal.classList.add('active'), 10);
     }
 }
 
 function openRegisterModal() {
     if (registerModal) {
-        registerModal.classList.add('active');
+        registerModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        setTimeout(() => registerModal.classList.add('active'), 10);
     }
 }
 
@@ -42,6 +44,7 @@ function closeLoginModalFunc() {
     if (loginModal) {
         loginModal.classList.remove('active');
         document.body.style.overflow = '';
+        setTimeout(() => { loginModal.style.display = 'none'; }, 300);
     }
 }
 
@@ -49,17 +52,18 @@ function closeRegisterModalFunc() {
     if (registerModal) {
         registerModal.classList.remove('active');
         document.body.style.overflow = '';
+        setTimeout(() => { registerModal.style.display = 'none'; }, 300);
     }
 }
 
 function switchToRegisterModal() {
     closeLoginModalFunc();
-    openRegisterModal();
+    setTimeout(() => openRegisterModal(), 320);
 }
 
 function switchToLoginModal() {
     closeRegisterModalFunc();
-    openLoginModal();
+    setTimeout(() => openLoginModal(), 320);
 }
 
 // ============================================
@@ -104,14 +108,20 @@ if (closeRegisterModal) {
 
 // Switch between modals
 if (switchToRegister) {
-    switchToRegister.addEventListener('click', switchToRegisterModal);
+    switchToRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchToRegisterModal();
+    });
 }
 
 if (switchToLogin) {
-    switchToLogin.addEventListener('click', switchToLoginModal);
+    switchToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchToLoginModal();
+    });
 }
 
-// Close modal when clicking outside
+// Close modal when clicking outside/overlay
 if (loginModal) {
     loginModal.addEventListener('click', (e) => {
         if (e.target === loginModal || e.target.classList.contains('modal-overlay')) {
@@ -128,27 +138,33 @@ if (registerModal) {
     });
 }
 
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLoginModalFunc();
+        closeRegisterModalFunc();
+    }
+});
+
 // ============================================
 // Login Form Submission
 // ============================================
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const email = loginForm.querySelector('input[type="email"]').value.trim();
         const password = loginForm.querySelector('input[type="password"]').value;
-        
+
         if (!email || !password) {
             showToast('Please fill in all fields', 'error');
             return;
         }
-        
-        // Get users from localStorage
+
         const users = JSON.parse(localStorage.getItem('pixelportUsers') || '[]');
         const user = users.find(u => u.email === email && u.password === password);
-        
+
         if (user) {
-            // Store logged in user
             localStorage.setItem('pixelportUser', JSON.stringify(user));
             showToast(`Welcome back, ${user.name}!`, 'success');
             closeLoginModalFunc();
@@ -165,54 +181,48 @@ if (loginForm) {
 if (registerForm) {
     registerForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const name = registerForm.querySelector('input[type="text"]').value.trim();
         const email = registerForm.querySelector('input[type="email"]').value.trim();
         const password = registerForm.querySelectorAll('input[type="password"]')[0].value;
         const confirmPassword = registerForm.querySelectorAll('input[type="password"]')[1].value;
         const termsChecked = registerForm.querySelector('input[type="checkbox"]').checked;
-        
-        // Validation
+
         if (!name || !email || !password || !confirmPassword) {
             showToast('Please fill in all fields', 'error');
             return;
         }
-        
         if (password !== confirmPassword) {
             showToast('Passwords do not match', 'error');
             return;
         }
-        
         if (password.length < 6) {
             showToast('Password must be at least 6 characters', 'error');
             return;
         }
-        
         if (!termsChecked) {
             showToast('Please agree to the Terms of Service', 'error');
             return;
         }
-        
-        // Check if user already exists
+
         const users = JSON.parse(localStorage.getItem('pixelportUsers') || '[]');
         if (users.some(u => u.email === email)) {
             showToast('Email already registered', 'error');
             return;
         }
-        
-        // Create new user
+
         const newUser = {
             id: Date.now(),
-            name: name,
-            email: email,
-            password: password,
+            name,
+            email,
+            password,
             createdAt: new Date().toISOString()
         };
-        
+
         users.push(newUser);
         localStorage.setItem('pixelportUsers', JSON.stringify(users));
         localStorage.setItem('pixelportUser', JSON.stringify(newUser));
-        
+
         showToast('Account created successfully!', 'success');
         closeRegisterModalFunc();
         updateAuthUI(newUser);
@@ -223,20 +233,13 @@ if (registerForm) {
 // Update UI After Login
 // ============================================
 function updateAuthUI(user) {
-    // Hide Login/Register links
-    if (authLinks) {
-        authLinks.style.display = 'none';
-    }
-    
-    // Show User Menu
+    if (authLinks) authLinks.style.display = 'none';
+
     if (userMenu) {
         userMenu.style.display = 'block';
-        if (userNameSpan) {
-            userNameSpan.textContent = user.name.split(' ')[0];
-        }
+        if (userNameSpan) userNameSpan.textContent = user.name.split(' ')[0];
     }
-    
-    // Update footer links
+
     const footerLoginLinkEl = document.getElementById('footerLoginLink');
     const footerRegisterLinkEl = document.getElementById('footerRegisterLink');
     if (footerLoginLinkEl) footerLoginLinkEl.style.display = 'none';
@@ -251,14 +254,14 @@ if (userMenuTrigger && userDropdownMenu) {
         e.stopPropagation();
         userDropdownMenu.classList.toggle('active');
     });
-    
+
     document.addEventListener('click', () => {
         userDropdownMenu.classList.remove('active');
     });
 }
 
 // ============================================
-// Logout Functionality
+// Logout
 // ============================================
 const logoutBtn = document.getElementById('logoutBtn');
 if (logoutBtn) {
@@ -266,30 +269,25 @@ if (logoutBtn) {
         e.preventDefault();
         localStorage.removeItem('pixelportUser');
         showToast('Logged out successfully', 'info');
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        setTimeout(() => window.location.reload(), 1000);
     });
 }
 
 // ============================================
-// Check if user is already logged in
+// Check if already logged in on page load
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     const savedUser = localStorage.getItem('pixelportUser');
-    if (savedUser) {
-        updateAuthUI(JSON.parse(savedUser));
-    }
+    if (savedUser) updateAuthUI(JSON.parse(savedUser));
 });
 
 // ============================================
-// Toast Notification Function
+// Toast Notification
 // ============================================
 function showToast(message, type = 'success') {
-    // Remove existing toast
     const existingToast = document.querySelector('.toast-notification');
     if (existingToast) existingToast.remove();
-    
+
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.style.cssText = `
@@ -302,7 +300,6 @@ function showToast(message, type = 'success') {
         padding: 12px 24px;
         border-radius: 12px;
         z-index: 9999;
-        animation: slideUp 0.3s ease;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         font-size: 14px;
         font-weight: 500;
@@ -310,23 +307,18 @@ function showToast(message, type = 'success') {
         align-items: center;
         gap: 10px;
     `;
-    
+
     toast.innerHTML = `
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-            ${type === 'success' 
+            ${type === 'success'
                 ? '<path d="M20 6L9 17l-5-5"/>'
                 : type === 'error'
                 ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
-                : '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>'
-            }
+                : '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>'}
         </svg>
         <span>${message}</span>
     `;
-    
+
     document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.style.animation = 'slideDown 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
 }
