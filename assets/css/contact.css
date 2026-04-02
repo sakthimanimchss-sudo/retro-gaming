@@ -15,7 +15,15 @@
     min-height: 500px;
     display: flex;
     align-items: center;
-    isolation: isolate;
+    isolation: auto;
+    background: linear-gradient(135deg, 
+        #1a1a2e 0%, 
+        #16213e 25%, 
+        #0f172a 50%, 
+        #1e1a2e 75%, 
+        #2a1a2e 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
 }
 
 /* Animated Gradient Background */
@@ -33,7 +41,7 @@
         #2a1a2e 100%);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
-    z-index: 0;
+    z-index: -1;
 }
 
 @keyframes gradientShift {
@@ -211,7 +219,7 @@
 
 .contact-hero-content {
     position: relative;
-    z-index: 3;
+    z-index: 10;
     max-width: 800px;
     margin: 0 auto;
     color: white;
