@@ -78,6 +78,38 @@
   direction: rtl;
 }
 
+/* ===== RTL LOGO ADJUSTMENTS - ONLY CHANGE ADDED ===== */
+/* Reverse logo order in RTL so icon appears on the right side (common RTL pattern) */
+[dir="rtl"] .pixel-logo {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pixel-logo svg {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Footer logo RTL adjustment */
+[dir="rtl"] .footer-logo {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .footer-logo svg {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Mobile logo RTL adjustment */
+[dir="rtl"] .mobile-logo-link {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .mobile-logo-link svg {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* ===== END RTL LOGO ADJUSTMENTS ===== */
+
 /* Reset & Base */
 * {
   margin: 0;
@@ -1349,3 +1381,340 @@ body.menu-open {
     display: none;
   }
 }
+
+/* ============================================
+   MODAL STYLES - FIXED
+   ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 0;
+}
+
+.modal-container {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    max-width: 480px;
+    width: 100%;
+    padding: 2rem;
+    box-shadow: var(--shadow-xl);
+    animation: modalSlideIn 0.3s ease;
+    z-index: 1;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--gray-400);
+    cursor: pointer;
+    transition: var(--transition);
+    background: none;
+    border: none;
+    line-height: 1;
+    z-index: 2;
+}
+
+.modal-close:hover {
+    color: var(--danger);
+}
+
+/* Modal Brand Logo */
+.modal-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.modal-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--body-color);
+}
+
+.modal-logo svg {
+    color: var(--primary);
+}
+
+.modal-logo span {
+    color: var(--primary);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header svg {
+    margin-bottom: 0.75rem;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    color: var(--body-color);
+}
+
+.modal-header p {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--body-color);
+}
+
+.form-group input {
+    padding: 0.75rem 1rem;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-md);
+    color: var(--body-color);
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(196, 69, 12, 0.1);
+}
+
+/* ← THIS fixes "Remember me Forgot Password?" being joined */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    cursor: pointer;
+}
+
+.checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.forgot-link {
+    font-size: 0.875rem;
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    margin-top: 0.5rem;
+}
+
+.form-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   MODAL OVERRIDE FIX
+   Prevents index.css from breaking modal styles
+   ============================================ */
+
+/* Force modals hidden on load */
+#loginModal,
+#registerModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: transparent;
+}
+
+#loginModal.active,
+#registerModal.active {
+    display: flex !important;
+}
+
+/* Fix modal form-note conflict with newsletter form-note */
+.modal .form-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    text-align: center;
+    background: transparent;
+}
+
+.modal .form-note span {
+    color: var(--gray-500);
+    background: transparent;
+    padding: 0;
+}
+
+/* Fix modal form-group conflict */
+.modal .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    grid-column: unset;
+    width: 100%;
+}
+
+.modal .form-group input {
+    padding: 0.75rem 1rem;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: var(--radius-md);
+    color: var(--body-color);
+    font-size: 0.875rem;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal .form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(196, 69, 12, 0.1);
+}
+
+/* Fix modal form-options */
+.modal .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    grid-template-columns: unset;
+}
+
+/* Fix modal form-row conflict */
+.modal .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    grid-template-columns: unset;
+}
+
+/* Prevent stat-item styles leaking into modal */
+.modal .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-size: unset;
+    color: unset;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+a.modal-logo {
+    text-decoration: none;
+    color: var(--body-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s ease;
+}
+
+a.modal-logo:hover {
+    opacity: 0.75;
+}
+
+a.modal-logo svg {
+    color: var(--primary);
+}
+
+a.modal-logo span {
+    color: var(--primary);
+}
+
