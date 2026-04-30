@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>My Dashboard | PixelPort</title>
+<meta name="description" content="Manage your orders, wishlist, and account settings at PixelPort.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/512/2702/2702145.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn-icons-png.flaticon.com/512/2702/2702145.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn-icons-png.flaticon.com/512/2702/2702145.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎮%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #c4450c;
+            --primary-dark: #a03a0a;
+            --primary-light: #e06e2e;
+            --secondary: #1e2a3e;
+            --accent: #f4a261;
+            --success: #2a9d8f;
+            --danger: #e76f51;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --body-bg: #ffffff;
+            --body-color: #0f172a;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --header-bg: rgba(255, 255, 255, 0.98);
+            --footer-bg: #0f172a;
+            --footer-color: #94a3b8;
+            --input-bg: #ffffff;
+            --input-border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --transition: all 0.3s ease;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #e06e2e;
+            --primary-dark: #c4450c;
+            --primary-light: #f4a261;
+            --body-bg: #0f172a;
+            --body-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --header-bg: rgba(15, 23, 42, 0.98);
+            --footer-bg: #0a0f1c;
+            --footer-color: #64748b;
+            --input-bg: #1e293b;
+            --input-border: #334155;
+            --gray-100: #1e293b;
+            --gray-200: #334155;
+            --gray-300: #475569;
+            --gray-400: #64748b;
+            --gray-500: #94a3b8;
+            --gray-600: #cbd5e1;
+        }
+        
+        [dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--body-color);
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden !important;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* UNIFIED CONTAINER - NO HORIZONTAL SCROLL */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 0 1rem; }
+        }
+        
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        button { cursor: pointer; background: none; border: none; font-family: inherit; }
+
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 72px;
+            position: relative;
+            width: 100%;
+        }
+
+        .logo {
+            flex-shrink: 0;
+            margin: 0 auto;
+        }
+
+        .pixel-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .pixel-logo svg { color: var(--primary); }
+        .logo-text { color: var(--body-color); }
+        .logo-text span { color: var(--primary); }
+
+        .action-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: absolute;
+            right: 0;
+        }
+
+        [dir="rtl"] .action-group {
+            right: auto;
+            left: 0;
+        }
+
+        .action-btn {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            border-radius: 50%;
+            color: var(--body-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 18px;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* DASHBOARD LAYOUT - FULL WIDTH NO SCROLL */
+        .dashboard-wrapper {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 90px 2rem 40px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-wrapper { padding: 80px 1.5rem 30px; }
+        }
+        @media (max-width: 480px) {
+            .dashboard-wrapper { padding: 75px 1rem 20px; }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            border: 1px solid var(--card-border);
+            width: 100%;
+        }
+
+        .user-avatar {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .avatar-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .avatar-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-avatar h3 { font-size: 18px; margin-bottom: 4px; }
+        .user-avatar p { font-size: 12px; color: var(--body-color); opacity: 0.7; }
+
+        .sidebar-nav { list-style: none; }
+        .sidebar-nav li { margin-bottom: 8px; }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: var(--body-color);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .sidebar-nav li.active a,
+        .sidebar-nav a:hover {
+            background: rgba(196, 69, 12, 0.1);
+            color: var(--primary);
+        }
+        .logout-btn {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--card-border);
+        }
+        .logout-btn a { color: #e76f51; }
+
+        /* MAIN CONTENT */
+        .main-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--card-border);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .content-section { display: none; }
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .centered-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .centered-title h2 {
+            font-size: 28px;
+            background: linear-gradient(135deg, var(--primary), #f4a261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .centered-title p { color: var(--body-color); opacity: 0.7; }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--gray-100);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-3px); }
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 13px;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        /* SLIDER SECTION - NO HORIZONTAL SCROLL ON PAGE */
+        .slider-section { margin: 30px 0; width: 100%; }
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .slider-header h3 { font-size: 18px; }
+        .slider-nav { display: flex; gap: 8px; }
+        .slider-nav button {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--body-color);
+        }
+        .slider-nav button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .slider-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+        .slider-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+        .game-card {
+            width: 220px;
+            flex-shrink: 0;
+            background: var(--gray-100);
+            border-radius: 12px;
+            padding: 12px;
+            transition: all 0.3s;
+            border: 1px solid var(--card-border);
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .game-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .game-card h4 { margin: 10px 0 5px; font-size: 15px; }
+        .game-card .price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .buy-btn {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .buy-btn:hover { background: var(--primary-dark); }
+
+        /* TABLES - RESPONSIVE */
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        .orders-table th,
+        .orders-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .orders-table th {
+            background: var(--gray-100);
+            font-weight: 600;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-delivered { background: #2a9d8f; color: white; }
+
+        /* WISHLIST */
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .wishlist-item {
+            background: var(--gray-100);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .wishlist-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+        }
+        .wishlist-info { padding: 12px; }
+        .wishlist-info h4 { font-size: 14px; margin-bottom: 5px; }
+        .wishlist-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .remove-wishlist {
+            width: 100%;
+            padding: 6px;
+            margin-top: 8px;
+            background: #e76f51;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* SETTINGS */
+        .settings-form { max-width: 450px; margin: 0 auto; width: 100%; }
+        .form-group { margin-bottom: 16px; width: 100%; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: var(--gray-100);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--body-color);
+        }
+        .btn-save {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--card-bg);
+            margin-top: 40px;
+            font-size: 12px;
+            border-top: 1px solid var(--card-border);
+            width: 100%;
+        }
+
+        /* ========== RESPONSIVE BREAKPOINTS - NO HORIZONTAL SCROLL ========== */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .stat-card { padding: 16px; }
+            .stat-value { font-size: 24px; }
+            .centered-title h2 { font-size: 22px; }
+            .sidebar { padding: 20px; }
+            .main-content { padding: 20px; }
+            .game-card { width: 200px; }
+            .game-card img { height: 120px; }
+            .orders-table th,
+            .orders-table td { padding: 8px; font-size: 13px; }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .slider-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .slider-nav {
+                align-self: flex-end;
+            }
+            .game-card { width: 180px; }
+            .game-card img { height: 110px; }
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-nav a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            .avatar-icon {
+                width: 60px;
+                height: 60px;
+            }
+            .user-avatar h3 { font-size: 16px; }
+            /* Make tables scrollable horizontally on small devices */
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .centered-title h2 { font-size: 20px; }
+            .centered-title p { font-size: 12px; }
+            .stat-card { padding: 12px; }
+            .stat-value { font-size: 22px; }
+            .stat-label { font-size: 11px; }
+            .game-card { width: 160px; }
+            .game-card img { height: 100px; }
+            .game-card h4 { font-size: 13px; }
+            .action-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 16px;
+            }
+            .pixel-logo { font-size: 1.2rem; }
+            .pixel-logo svg { width: 22px; height: 22px; }
+            .navbar { height: 60px; }
+            .dashboard-wrapper { padding: 70px 0.75rem 20px; }
+            .container { padding: 0 0.75rem; }
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            z-index: 1000;
+            transition: transform 0.3s;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 480px) {
+            .toast { white-space: normal; text-align: center; max-width: 90%; font-size: 12px; padding: 10px 16px; }
+        }
+
+        /* Professional Gaming Background Image */
+body {
+    position: relative;
+    background-color: var(--body-bg);
+    background-image: url('https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1920&h=1080&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="pixel-logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="2" y="6" width="20" height="12" rx="2"/>
+                        <path d="M8 6V4h8v2M12 18v2M7 10h2M15 10h2"/>
+                    </svg>
+                    <span class="logo-text">PIXEL<span>PORT</span></span>
+                </div>
+            </a>
+            <div class="action-group">
+                <button id="rtlToggle" class="action-btn" aria-label="Toggle RTL">🌐</button>
+                <button id="themeToggle" class="action-btn" aria-label="Toggle Theme">🌙</button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-grid">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="user-avatar">
+                <div class="avatar-icon">
+                    <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Pixel" alt="User">
+                </div>
+                <h3 id="userName">Demo User</h3>
+                <p id="userEmail">demo@pixelport.com</p>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="active" data-tab="overview">
+                    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Overview</a>
+                </li>
+                <li data-tab="orders">
+                    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg> My Orders</a>
+                </li>
+                <li data-tab="wishlist">
+                    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Wishlist</a>
+                </li>
+                <li data-tab="settings">
+                    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.65 1.65 0 0 0-1.8-.3"/><path d="M4.6 9a1.65 1.65 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.65 1.65 0 0 0 1.8.3"/></svg> Settings</a>
+                </li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg> Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div id="overview" class="content-section active">
+                <div class="centered-title">
+                    <h2>Welcome Back, <span id="welcomeName">Demo</span>! 🎮</h2>
+                    <p>Your gaming dashboard - track orders, manage wishlist, discover new games</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">Total Orders</div></div>
+                    <div class="stat-card"><div class="stat-value">6</div><div class="stat-label">Wishlist Items</div></div>
+                    <div class="stat-card"><div class="stat-value">$247</div><div class="stat-label">Total Spent</div></div>
+                </div>
+
+                <div class="slider-section">
+                    <div class="slider-header">
+                        <h3>🎮 Trending Games</h3>
+                        <div class="slider-nav">
+                            <button id="prevBtn">‹</button>
+                            <button id="nextBtn">›</button>
+                        </div>
+                    </div>
+                    <div class="slider-container" id="sliderContainer">
+                        <div class="slider-track" id="galleryTrack">
+                            <div class="game-card"><img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?w=300&h=140&fit=crop" alt="Mario"><h4>Super Mario Bros. 3</h4><div class="price">$29.99</div><button class="buy-btn">Buy Now</button></div>
+                            <div class="game-card"><img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&h=140&fit=crop" alt="Sonic"><h4>Sonic the Hedgehog 2</h4><div class="price">$19.99</div><button class="buy-btn">Buy Now</button></div>
+                            <div class="game-card"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&h=140&fit=crop" alt="Zelda"><h4>Zelda: Ocarina of Time</h4><div class="price">$49.99</div><button class="buy-btn">Buy Now</button></div>
+                            <div class="game-card"><img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=300&h=140&fit=crop" alt="Final Fantasy"><h4>Final Fantasy VII</h4><div class="price">$59.99</div><button class="buy-btn">Buy Now</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🕒 Recent Orders</h3>
+                <table class="orders-table">
+                    <thead><tr><th>Order #</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>#PP-1004</td><td>Mar 15, 2026</td><td>$59.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                        <tr><td>#PP-1003</td><td>Feb 28, 2026</td><td>$49.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                        <tr><td>#PP-1002</td><td>Feb 10, 2026</td><td>$29.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="orders" class="content-section">
+                <div class="centered-title"><h2>📦 My Orders</h2><p>Track your purchase history</p></div>
+                <table class="orders-table">
+                    <thead><tr><th>Order #</th><th>Date</th><th>Item</th><th>Total</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>#PP-1004</td><td>Mar 15, 2026</td><td>Final Fantasy VII</td><td>$59.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                        <tr><td>#PP-1003</td><td>Feb 28, 2026</td><td>Zelda: Ocarina of Time</td><td>$49.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                        <tr><td>#PP-1002</td><td>Feb 10, 2026</td><td>Super Mario Bros. 3</td><td>$29.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                        <tr><td>#PP-1001</td><td>Jan 5, 2026</td><td>Sonic the Hedgehog 2</td><td>$19.99</td><td><span class="badge badge-delivered">Delivered</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="wishlist" class="content-section">
+                <div class="centered-title"><h2>❤️ My Wishlist</h2><p>Games you've saved for later</p></div>
+                <div class="wishlist-grid">
+                    <div class="wishlist-item"><img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=300&h=150&fit=crop"><div class="wishlist-info"><h4>Chrono Trigger (SNES)</h4><div class="wishlist-price">$199.99</div><button class="remove-wishlist">Remove</button></div></div>
+                    <div class="wishlist-item"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&h=150&fit=crop"><div class="wishlist-info"><h4>EarthBound (SNES)</h4><div class="wishlist-price">$299.99</div><button class="remove-wishlist">Remove</button></div></div>
+                    <div class="wishlist-item"><img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&h=150&fit=crop"><div class="wishlist-info"><h4>Castlevania: Symphony</h4><div class="wishlist-price">$129.99</div><button class="remove-wishlist">Remove</button></div></div>
+                </div>
+            </div>
+
+            <div id="settings" class="content-section">
+                <div class="centered-title"><h2>⚙️ Account Settings</h2><p>Update your profile information</p></div>
+                <form class="settings-form" id="settingsForm">
+                    <div class="form-group"><label>Full Name</label><input type="text" id="fullName" value="Demo User"></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" id="email" value="demo@pixelport.com"></div>
+                    <div class="form-group"><label>Current Password</label><input type="password" placeholder="Enter current password"></div>
+                    <div class="form-group"><label>New Password</label><input type="password" placeholder="Leave blank"></div>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 PixelPort. All rights reserved. | Player Dashboard</p>
+    </div>
+</footer>
+
+<script>
+// THEME
+const htmlRoot = document.getElementById("htmlRoot");
+const themeBtn = document.getElementById("themeToggle");
+let theme = localStorage.getItem("theme") || "light";
+htmlRoot.setAttribute("data-theme", theme);
+if(themeBtn) {
+    themeBtn.onclick = () => {
+        theme = theme === "dark" ? "light" : "dark";
+        htmlRoot.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    };
+}
+
+// RTL
+const rtlBtn = document.getElementById("rtlToggle");
+const savedDir = localStorage.getItem("dir") || "ltr";
+htmlRoot.setAttribute("dir", savedDir);
+if(rtlBtn) {
+    rtlBtn.onclick = () => {
+        let dir = htmlRoot.getAttribute("dir") === "rtl" ? "ltr" : "rtl";
+        htmlRoot.setAttribute("dir", dir);
+        localStorage.setItem("dir", dir);
+    };
+}
+
+// TAB SWITCHING
+const tabs = document.querySelectorAll('.sidebar-nav li[data-tab]');
+const sections = {
+    overview: document.getElementById('overview'),
+    orders: document.getElementById('orders'),
+    wishlist: document.getElementById('wishlist'),
+    settings: document.getElementById('settings')
+};
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabId = tab.getAttribute('data-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(sections).forEach(s => s.classList.remove('active'));
+        if (sections[tabId]) sections[tabId].classList.add('active');
+    });
+});
+
+// LOGOUT
+document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('pixelportUser');
+    showToast('Logged out successfully!');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+});
+
+// SETTINGS SAVE
+document.getElementById('settingsForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('Settings saved successfully!');
+});
+
+// REMOVE WISHLIST
+document.querySelectorAll('.remove-wishlist').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.closest('.wishlist-item')?.remove();
+        showToast('Item removed from wishlist');
+    });
+});
+
+// BUY BUTTONS
+document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.game-card');
+        const name = card.querySelector('h4')?.innerText || 'Game';
+        const price = card.querySelector('.price')?.innerText || '$0';
+        showToast(`🎮 ${name} added to cart for ${price}!`);
+    });
+});
+
+// TOAST
+function showToast(msg) {
+    let toast = document.querySelector('.toast');
+    if(toast) toast.remove();
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.style.transform = 'translateX(-50%) translateY(0)', 10);
+    setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(100px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+// HORIZONTAL SCROLL FOR MOBILE SLIDER
+const sliderContainer = document.getElementById('sliderContainer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+if(sliderContainer && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+        sliderContainer.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+        sliderContainer.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+}
+
+// LOAD USER
+const savedUser = localStorage.getItem('pixelportUser');
+if(savedUser) {
+    const user = JSON.parse(savedUser);
+    document.getElementById('userName').innerText = user.name || 'Demo User';
+    document.getElementById('userEmail').innerText = user.email || 'demo@pixelport.com';
+    document.getElementById('fullName').value = user.name || 'Demo User';
+    document.getElementById('email').value = user.email || 'demo@pixelport.com';
+    document.getElementById('welcomeName').innerText = user.name?.split(' ')[0] || 'Demo';
+} else {
+    const demoUser = { name: "Demo User", email: "demo@pixelport.com", role: "user" };
+    localStorage.setItem("pixelportUser", JSON.stringify(demoUser));
+}
+</script>
+
+</body>
+</html>
