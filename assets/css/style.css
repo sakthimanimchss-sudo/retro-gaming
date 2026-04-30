@@ -1676,3 +1676,34 @@ a.modal-logo span {
     color: var(--primary);
 }
 
+
+/* Action buttons (RTL + Theme + Cart) */
+.action-btn,
+.cart-icon {
+  width: 44px;
+  height: 44px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* If using emoji icons */
+.action-btn {
+  font-size: 22px;
+}
+
+/* Cart icon size */
+.cart-icon {
+  font-size: 22px;
+  position: relative;
+}
+
+/* Cart count badge */
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 10px;
+  padding: 2px 6px;
+}
